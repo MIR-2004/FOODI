@@ -4,15 +4,13 @@ import CheckoutForm from './CheckoutForm';
 import { loadStripe } from '@stripe/stripe-js';
 import useCart from '../../Hooks/useCart';
 
-
-
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 
 const Payment=() => {
 
 const [cart] = useCart();
 
-  //console.log(cart)
+  // console.log(cart)
 
 
   // calculate prices 
