@@ -18,7 +18,7 @@ const Cartpage = () => {
 
   //handle increase
   const handleIncrease = (item) => {
-    fetch(`http://localhost:6001/carts/${item._id}`, {
+    fetch(`https://foodi-o6pu.onrender.com//carts/${item._id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -44,7 +44,7 @@ const Cartpage = () => {
   //handle decrease
   const handleDecrease = (item) => {
     if (item.quantity > 1) {
-      fetch(`http://localhost:6001/carts/${item._id}`, {
+      fetch(`https://foodi-o6pu.onrender.com//carts/${item._id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -92,7 +92,7 @@ const Cartpage = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:6001/carts/${item._id}`).then((response) => {
+        axios.delete(`https://foodi-o6pu.onrender.com//carts/${item._id}`).then((response) => {
           if(response) {
             refetch();
              Swal.fire("Deleted!", "Your file has been deleted.", "success",);

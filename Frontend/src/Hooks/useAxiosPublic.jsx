@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-    baseURL: 'http://localhost:6001'
+    baseURL: 'https://foodi-o6pu.onrender.com/'
   });
 
 const useAxiosPublic =() => {
