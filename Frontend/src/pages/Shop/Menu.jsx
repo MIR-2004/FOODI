@@ -10,11 +10,10 @@ const Menu = () => {
     const [sortOption, setSortOption] = useState("default");
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(9);
-
     useEffect(() =>{
         const fetchData = async () => {
             try{
-                const response = await fetch("https://foodi-o6pu.onrender.com/menu");
+                const response = await fetch("https://foodi-gamma-eight.vercel.app/menu");
                 const data = await response.json();
                 //console.log(data)
                 setMenu(data);
