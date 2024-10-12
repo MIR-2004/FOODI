@@ -27,7 +27,7 @@ const Router = createBrowserRouter([
         },
         {
           path:"/menu",
-          element: <Menu/>
+          element: <PrivateRouter><Menu/></PrivateRouter>
         },
         {
           path: "cart-page",
