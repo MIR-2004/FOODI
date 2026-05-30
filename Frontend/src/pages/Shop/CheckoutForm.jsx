@@ -62,7 +62,13 @@ const CheckoutForm = ({ price, cart }) => {
     }
    })
 
-    if (paymentIntent.status === "succeeded") {
+    if (confirmError) {
+      console.log("[confirmError]", confirmError);
+      setCardError(confirmError.message);
+      return;
+    }
+
+    if (paymentIntent && paymentIntent.status === "succeeded") {
       console.log(paymentIntent.id);
       setCardError(`your transactionId is ${paymentIntent.id}`);
       //paymnet info

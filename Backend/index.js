@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const port = process.env.PORT || 6001;
@@ -13,9 +13,11 @@ app.use(express.json());
 
 mongoose
   .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@foodi.ey2veef.mongodb.net/foodi?retryWrites=true&w=majority&appName=foodi`
+    process.env.DB_USER && process.env.DB_PASSWORD
+      ? `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@foodi.ey2veef.mongodb.net/foodi?retryWrites=true&w=majority&appName=foodi`
+      : "mongodb://127.0.0.1:27017/foodi"
   )
-  .then(console.log("Mongodb connected successfully"))
+  .then(() => console.log("Mongodb connected successfully"))
   .catch((error) => console.log("Error connecting to mongodb", error));
 
 //jwt authentication

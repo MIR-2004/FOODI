@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Cards from "../../Components/Cards";
 import { FaFilter } from "react-icons/fa";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Menu = () => {
 
@@ -10,11 +11,14 @@ const Menu = () => {
     const [sortOption, setSortOption] = useState("default");
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(9);
+    
+    const axiosPublic = useAxiosPublic();
+
     useEffect(() =>{
         const fetchData = async () => {
             try{
-                const response = await fetch("https://foodi-o6pu.onrender.com/menu");
-                const data = await response.json();
+                const response = await axiosPublic.get("/menu");
+                const data = response.data;
                 //console.log(data)
                 setMenu(data);
                 setFilteredItems(data);
@@ -36,7 +40,7 @@ const Menu = () => {
 
     const showAll = () => {
         setFilteredItems(menu);
-        selectedCategory("all");
+        setSelectedCategory("all");
         setCurrentPage(1)
     };
 
@@ -76,7 +80,7 @@ const Menu = () => {
     <div>
         {/**menu Banner */}
         
-      <div className="section-container bg-gradient-to-r from-[#FAFAFA} from-0% to-[#FCFCFC] to-100%">
+      <div className="section-container bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%">
 
 
         <div className="py-48 flex flex-col justify-center items-center gap-8">

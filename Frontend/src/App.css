@@ -1,36 +1,99 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-body{
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+body {
     font-family: 'Inter', sans-serif;
+    background-color: #0b0f19;
+    color: #f1f5f9;
+    overflow-x: hidden;
 }
-header{
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Outfit', sans-serif;
+}
+
+header {
     z-index: 1001 !important;
 }
 
-.section-container{
+/* Base custom classes revamping for luxury theme */
+.section-container {
     @apply max-w-screen-2xl container mx-auto xl:px-24 px-4;
 }
 
-.subtitle{
-    @apply text-red uppercase tracking-wide font-medium text-lg;
+.subtitle {
+    @apply text-red uppercase tracking-wider font-semibold text-sm;
+    letter-spacing: 0.15em;
 }
-.title{
-    @apply text-4xl md:text-5xl font-bold my-2 md:leading-snug leading-snug;
+
+.title {
+    @apply text-4xl md:text-5xl font-black my-3 md:leading-snug leading-snug text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-400;
 }
-.heartStar{
-    border-radius: 0px 28px 0px 28px;
+
+.heartStar {
+    border-radius: 0px 24px 0px 24px;
 }
-.footer-title{
-    color: black !important;
+
+.footer-title {
+    color: #94a3b8 !important;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
 }
-.active{
-    text-decoration: underline;
-    text-underline-offset: 5px;
-    color: #39D84A;
+
+.active {
+    text-underline-offset: 6px;
+    color: #39DB4A !important;
+    font-weight: 600;
+}
+
+/* Glassmorphism custom components */
+.glass-nav {
+    background: rgba(11, 15, 25, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-card {
+    background: rgba(17, 24, 39, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+    background: rgba(17, 24, 39, 0.75);
+    border-color: rgba(57, 219, 74, 0.3);
+    box-shadow: 0 10px 30px -10px rgba(57, 219, 74, 0.15);
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0b0f19;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(57, 219, 74, 0.3);
 }
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }

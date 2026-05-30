@@ -9,7 +9,9 @@ const paymentSchema =  new Schema({
     status: String,
     itemName: Array,
     cartItem: Array,
+    cartItems: Array,
     menuItem: Array,
+    menuItems: Array,
     createdAt: {
         type: Date,
         default: Date.now

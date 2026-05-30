@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaGoogle,FaFacebook,FaGithub} from "react-icons/fa";
+import { FaGoogle, FaFacebook, FaGithub } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import axios from "axios";
@@ -8,62 +8,62 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
 const Model = () => {
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
 
-      const axiosPublic = useAxiosPublic();
-      const {signUpWithGmail, login} = useAuth();
-      const [errorMessage, setErrorMessage] = useState("");
+  const axiosPublic = useAxiosPublic();
+  const { signUpWithGmail, login } = useAuth();
+  const [errorMessage, setErrorMessage] = useState("");
 
-      //redirecting to home page 
-      const location = useLocation();
-      const navigate = useNavigate();
+  //redirecting to home page 
+  const location = useLocation();
+  const navigate = useNavigate();
 
-      const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
 
-      const onSubmit = (data) => {
-        const email = data.email;
-        const password = data.password;
-        console.log(email, password);
-        login(email,password).then((result) => {
-          const user = result.user;
-          const userInfor = {
-            name: data.name,
-            email: data.email,
-          };
-          axiosPublic
-            .post("/users", userInfor)
-            .then((response) => {
-              alert("SignIn  Succesfully");
-              navigate(from, { replace: true });
-            });
-
-        }).catch((error) => {
-          const errorMessage = error.message;
-          setErrorMessage("Provide a correct email and password!")
-        })
-      }
-
-      //google sign in 
-
-      const handleLogin = () => {
-        signUpWithGmail()
-          .then((result) => {
-            const user = result.user;
-            const userInfo = {
-              name: result?.user?.displayName,
-              email: result?.user?.email,
-            };
-            axios.post("/users", userInfo).then((response) => {
-              alert("SignIn Succesfully");
-              navigate("/");
-            });
-          })
-          .catch((error) => console.log(error));
+  const onSubmit = (data) => {
+    const email = data.email;
+    const password = data.password;
+    console.log(email, password);
+    login(email, password).then((result) => {
+      const user = result.user;
+      const userInfor = {
+        name: data.name,
+        email: data.email,
       };
+      axiosPublic
+        .post("/users", userInfor)
+        .then((response) => {
+          alert("SignIn  Succesfully");
+          navigate(from, { replace: true });
+        });
+
+    }).catch((error) => {
+      const errorMessage = error.message;
+      setErrorMessage("Provide a correct email and password!")
+    })
+  }
+
+  //google sign in 
+
+  const handleLogin = () => {
+    signUpWithGmail()
+      .then((result) => {
+        const user = result.user;
+        const userInfo = {
+          name: result?.user?.displayName,
+          email: result?.user?.email,
+        };
+        axios.post("/users", userInfo).then((response) => {
+          alert("SignIn Succesfully");
+          navigate("/");
+        });
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div>
@@ -82,7 +82,7 @@ const Model = () => {
                   type="email"
                   placeholder="email"
                   className="input input-bordered"
-                 
+
                   {...register("email")}
                 />
               </div>
@@ -96,7 +96,7 @@ const Model = () => {
                   type="password"
                   placeholder="password"
                   className="input input-bordered"
-                  
+
                   {...register("password")}
                 />
                 <label className="label">
@@ -108,7 +108,7 @@ const Model = () => {
 
               {/*error*/}
               {
-                errorMessage ? <p className="text-red text-xs italic">{errorMessage}</p>:""
+                errorMessage ? <p className="text-red text-xs italic">{errorMessage}</p> : ""
               }
 
               <div className="form-control mt-4">
@@ -131,13 +131,13 @@ const Model = () => {
 
             <div className="text-center space-x-3 mb-5">
               <button className="btn btn-circle hover:bg-green hover:text-white" onClick={handleLogin}>
-              <FaGoogle />
+                <FaGoogle />
               </button>
               <button className="btn btn-circle hover:bg-green hover:text-white">
-              <FaFacebook />
+                <FaFacebook />
               </button>
               <button className="btn btn-circle hover:bg-green hover:text-white">
-              <FaGithub />
+                <FaGithub />
               </button>
             </div>
           </div>

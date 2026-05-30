@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-    baseURL: 'https://foodi-o6pu.onrender.com'
+    baseURL: import.meta.env.VITE_BACKEND_URL || 'https://foodi-o6pu.onrender.com'
   });
 
 const useAxiosPublic =() => {

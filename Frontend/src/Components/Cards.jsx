@@ -4,7 +4,7 @@ import { FaHeart } from "react-icons/fa";
 import { AuthContext } from "../Context/AuthProvider";
 import Swal from 'sweetalert2';
 import useCart from "../Hooks/useCart";
-import axios from 'axios';
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 
 const Cards = ({ item }) => {
@@ -17,6 +17,7 @@ const Cards = ({ item }) => {
     setIsHeartFilled(!isHeartFilled);
   };
 
+  const axiosSecure = useAxiosSecure();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,7 +28,7 @@ const Cards = ({ item }) => {
     if(user && user.email){
         const cartItem = {menuItemId: _id, name, quantity : 1, image, price, email: user.email}
 
-        axios.post('https://foodi-o6pu.onrender.com/carts', cartItem)
+        axiosSecure.post('/carts', cartItem)
         .then((response) => {
           //console.log(response);
           if(response){
@@ -71,38 +72,38 @@ const Cards = ({ item }) => {
 
 
   return (
-    <div className="card bg-base-100 w-96 shadow-xl relative">
+    <div className="card glass-card relative w-96 overflow-hidden rounded-[2rem] p-4 transition-all duration-500 hover:-translate-y-2 group">
+      {/* Heart rate absolute float */}
       <div
-        className={`rating gap-1 absolute right-2 top-2 p-4 heartStar bg-green ${
-          isHeartFilled ? "text-rose-500" : "text-white"
+        className={`absolute right-4 top-4 p-3 rounded-full cursor-pointer z-10 bg-slate-900/80 border border-slate-800/80 backdrop-blur-md hover:scale-110 active:scale-95 transition-all duration-300 ${
+          isHeartFilled ? "text-rose-500" : "text-slate-400 hover:text-rose-400"
         }`}
         onClick={handleHeartClick}
       >
-        <FaHeart className="h-5 w-5 cursor-pointer" />
+        <FaHeart className="h-4.5 w-4.5 transition-transform duration-300" />
       </div>
 
-      <Link to={`/menu/${item._id}`}>
-        <figure>
+      <Link to={`/menu/${item._id}`} className="overflow-hidden rounded-2xl block relative">
+        <figure className="overflow-hidden rounded-2xl bg-slate-950/40">
           <img
             src={item.image}
-            alt=""
-            className="hover:scale-105 transition-all duration-200 md:h-72"
+            alt={item.name}
+            className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 md:h-64"
           />
         </figure>
       </Link>
-      <div className="card-body">
+      <div className="card-body px-1 py-4 space-y-2">
         <Link to={`/menu/${item._id}`}>
-          {" "}
-          <h2 className="card-title">{item.name}</h2>
+          <h2 className="card-title text-xl font-bold text-slate-100 hover:text-green transition-colors duration-300">{item.name}</h2>
         </Link>
-        <p>{item.recipe}</p>
-        <div className="card-actions justify-between items-center mt-2">
-          <h5 className="font-semibold">
-            <span className="text-sm text-red">$</span>
+        <p className="text-slate-400 text-sm leading-relaxed line-clamp-2">{item.recipe}</p>
+        <div className="card-actions justify-between items-center pt-3 border-t border-slate-900/50">
+          <h5 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-yellow-400">
+            <span className="text-sm font-semibold mr-0.5">$</span>
             {item.price}
           </h5>
           <button
-            className="btn bg-green text-white"
+            className="btn bg-gradient-to-r from-green to-emerald-600 hover:from-emerald-500 hover:to-green text-white font-bold border-0 rounded-xl px-5 shadow-lg shadow-green/10 hover:shadow-green/20 hover:scale-105 active:scale-95 transition-all duration-300"
             onClick={() => handleAddToCart(item)}
           >
             Add to Cart

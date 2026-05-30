@@ -5,7 +5,7 @@ const getAllMenuItenms = async(req, res) =>{
         const menus = await Menu.find({}).sort({createdAt: -1});
         res.status(200).json(menus)
     }catch(error){
-        res.status(500).json({massage:error.massage})
+        res.status(500).json({message:error.message})
     }
 }
 
@@ -16,7 +16,7 @@ const postMenuItem = async(req, res) => {
         const result = await Menu.create(newItem);
         res.status(200).json(result)
     } catch (error) {
-        res.status(500).json({massage:error.massage})
+        res.status(500).json({message:error.message})
     }
 
 }
@@ -31,7 +31,7 @@ const deleteMenuItem = async(req, res) => {
         }
         res.status(200).json({message: 'Menu Deleted Succefully'})
     } catch (error) {
-        res.status(500).json({massage:error.massage})
+        res.status(500).json({message:error.message})
     }
 }
 
@@ -43,7 +43,7 @@ const singleMenuItem =async (req, res) => {
         const menu = await Menu.findById(menuId)
         res.status(200).json(menu)
     } catch (error) {
-        res.status(500).json({massage:error.massage})
+        res.status(500).json({message:error.message})
     }
 }
 
@@ -59,7 +59,7 @@ const updateMenuItem = async (req, res) => {
         }
         res.status(200).json(updateMenu)
     } catch (error) {
-        res.status(500).json({massage:error.massage})
+        res.status(500).json({message:error.message})
     }
 }
 

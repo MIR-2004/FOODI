@@ -2,24 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAuth from '../../Hooks/useAuth'
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 function Order() {
 
   const {user} = useAuth();
-  const token = localStorage.getItem('access-token')
+  const axiosSecure = useAxiosSecure();
 
   const { refetch, data: orders = [] } = useQuery({
     queryKey: ["orders", user?.email],
     queryFn: async () => {
-      const res = await fetch(
-        `https://foodi-o6pu.onrender.com/payments?email=${user?.email}`,
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      return res.json();
+      const res = await axiosSecure.get(`/payments?email=${user?.email}`);
+      return res.data;
     },
   });
   //console.log(orders)
@@ -31,7 +25,7 @@ function Order() {
 
   return (
     <div className="section-container max-w-screen-2xl mx-auto xl:px-24 px-4 ">
-      <div className=" bg-gradient-to-r from-[#FAFAFA} from-0% to-[#FCFCFC] to-100%">
+      <div className=" bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%">
         <div className="py-36 flex flex-col justify-center items-center gap-8">
           <div className=" space-y-7 px-4">
             <h2 className="md:text-5xl text-4xl font-bold md:leading-snug leading-snug">

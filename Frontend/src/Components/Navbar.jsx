@@ -79,22 +79,22 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll); 
 
     return () => {
-      window.addEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <header className="max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out">
+    <header className="max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-500 ease-in-out z-50">
       <div
-        className={`navbar xl-px-24 ${
+        className={`navbar xl:px-24 transition-all duration-500 ease-in-out ${
           isSticky
-            ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
-            : ""
+            ? "glass-nav py-3 shadow-xl shadow-slate-950/20 text-slate-100"
+            : "py-5 text-slate-200"
         }`}
       >
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden hover:bg-slate-800/40 text-slate-100">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -112,22 +112,22 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-slate-900/95 border border-slate-800 backdrop-blur-md rounded-2xl z-[1] mt-3 w-52 p-3 shadow-2xl text-slate-200 space-y-1"
             >
               {navItems}
             </ul>
           </div>
-          <a href="/">
-            <img src={logo} alt="" />
+          <a href="/" className="flex items-center gap-2 transform hover:scale-105 transition-all duration-300">
+            <img src={logo} alt="FOODI" className="h-10" />
           </a>
         </div>
         <div className="navbar-center hidden lg:flex ">
-          <ul className="menu menu-horizontal px-1">{navItems}</ul>
+          <ul className="menu menu-horizontal px-1 gap-2 font-medium text-slate-200">{navItems}</ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end gap-2">
           {/* search button */}
 
-          <button className="btn btn-ghost btn-circle hidden lg:flex">
+          <button className="btn btn-ghost btn-circle hidden lg:flex text-slate-200 hover:bg-slate-800/40 hover:text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -149,7 +149,7 @@ const Navbar = () => {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle mr-3 lg:flex hidden items-center justify-center"
+            className="btn btn-ghost btn-circle mr-2 lg:flex hidden items-center justify-center text-slate-200 hover:bg-slate-800/40 hover:text-white transition-all"
           >
             <div className="indicator">
               <svg
@@ -166,7 +166,7 @@ const Navbar = () => {
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-              <span className="badge badge-sm bg-red rounded-full indicator-item">{cart.length || 0}</span>
+              <span className="badge badge-sm bg-red border-0 text-white font-bold rounded-full indicator-item shadow-sm shadow-red/40 animate-pulse">{cart.length || 0}</span>
             </div>
           </div>
           </Link>
@@ -175,7 +175,7 @@ const Navbar = () => {
           {
             user ? <Profile user={user}/> :  <button
             onClick={() => document.getElementById("my_modal_5").showModal()}
-            className="btn bg-green rounded-full px-6 text-white flex items-center gap-2"
+            className="btn bg-gradient-to-r from-green to-emerald-600 hover:from-emerald-500 hover:to-green border-0 text-white rounded-full px-6 flex items-center gap-2 shadow-lg shadow-green/20 hover:shadow-green/35 hover:scale-105 active:scale-95 transition-all duration-300"
           >
             <FaRegUser />
             Login

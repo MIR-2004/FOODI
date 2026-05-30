@@ -4,7 +4,7 @@ import useAuth from "./useAuth";
 
 
 const axiosSecure = axios.create({
-    baseURL: 'https://foodi-o6pu.onrender.com'
+    baseURL: import.meta.env.VITE_BACKEND_URL || 'https://foodi-o6pu.onrender.com'
   });
 
 

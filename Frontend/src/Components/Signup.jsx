@@ -22,7 +22,7 @@ const Signup = () => {
 
   const { signUpWithGmail, createUser, updateUserProfile } =
     useContext(AuthContext);
-    const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();
 
   const onSubmit = (data) => {
     const email = data.email;
