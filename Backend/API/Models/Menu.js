@@ -1,8 +1,7 @@
-const mongoose = require('mongoose')
-const {Schema} = mongoose;
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
 //create schema objects for menu items
-
 const menuSchema = new Schema({
     name: {
         type: String,
@@ -18,9 +17,8 @@ const menuSchema = new Schema({
         type: Date,
         default: Date.now
     }
-})
+});
 
 // create model
-
 const Menu = mongoose.model("Menu", menuSchema);
-module.exports = Menu;
+export default Menu;

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const {Schema} = mongoose;
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
 const cartSchema = new Schema({
     menuItemId: String,
@@ -18,10 +18,7 @@ const cartSchema = new Schema({
         trim: true,
         required: true
     }
-})
+});
 
-
-
-const carts = mongoose.model.carts || mongoose.model("Carts", cartSchema);
-
-module.exports = carts;
+const carts = mongoose.models.Carts || mongoose.model("Carts", cartSchema);
+export default carts;

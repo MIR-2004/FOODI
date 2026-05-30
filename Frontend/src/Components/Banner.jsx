@@ -1,5 +1,6 @@
 import React from "react";
 import banner from "../../public/images/home/banner.png";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -74,12 +75,12 @@ const Banner = () => {
             Where Each Plate Weaves a Story of Culinary Mastery and Passionate Craftsmanship.
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
-            <button className="bg-gradient-to-r from-green to-emerald-600 hover:from-emerald-500 hover:to-green text-white font-bold px-8 py-4 rounded-full shadow-lg shadow-green/20 hover:shadow-green/30 hover:scale-105 active:scale-95 transition-all duration-300">
+            <Link to="/menu" className="bg-gradient-to-r from-green to-emerald-600 hover:from-emerald-500 hover:to-green text-white font-bold px-8 py-4 rounded-full shadow-lg shadow-green/20 hover:shadow-green/30 hover:scale-105 active:scale-95 transition-all duration-300">
               Order Now
-            </button>
-            <button className="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-semibold px-8 py-4 rounded-full hover:scale-105 active:scale-95 transition-all duration-300">
+            </Link>
+            <Link to="/menu" className="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-semibold px-8 py-4 rounded-full hover:scale-105 active:scale-95 transition-all duration-300">
               Explore Menu
-            </button>
+            </Link>
           </div>
         </div>
 

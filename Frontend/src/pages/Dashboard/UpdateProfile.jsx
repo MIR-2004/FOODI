@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../Context/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -23,7 +24,7 @@ const UpdateProfile = () => {
     const photoURL = data.photoURL;
     updateUserProfile(name, photoURL)
       .then(() => {
-        alert("profile Updated Successfully")
+        toast.success("Profile updated successfully!");
         navigate(from, { replace: true });
       })
       .catch((error) => {

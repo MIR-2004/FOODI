@@ -13,6 +13,9 @@ import {
 } from "firebase/auth";
 import app from "../Firebase/Firebase.config";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const AuthContext = createContext();
 
 const auth = getAuth(app);
@@ -69,12 +72,15 @@ const AuthProvider = ({ children }) => {
           if(response.data.token){
             localStorage.setItem("access-token",response.data.token )
           }
+          setLoading(false);
+        }).catch((error) => {
+          console.error("JWT request failed", error);
+          setLoading(false);
         });
       }else{
         localStorage.removeItem("access-token")
+        setLoading(false);
       }
-
-      setLoading(false);
     });
     return () => {
       return unSubscribe();
@@ -90,7 +96,10 @@ const AuthProvider = ({ children }) => {
     loading,
   };
   return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={authInfo}>
+      {children}
+      <ToastContainer theme="dark" position="top-right" autoClose={3000} />
+    </AuthContext.Provider>
   );
 };
 

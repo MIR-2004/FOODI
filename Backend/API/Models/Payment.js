@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const {Schema} = mongoose;
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
-const paymentSchema =  new Schema({
+const paymentSchema = new Schema({
     transictionId: String,
     email: String,
     price: Number,
@@ -16,8 +16,7 @@ const paymentSchema =  new Schema({
         type: Date,
         default: Date.now
     }
-})
+});
 
-const Payment = mongoose.model('Payment',paymentSchema )
-
-module.exports = Payment
+const Payment = mongoose.model('Payment', paymentSchema);
+export default Payment;

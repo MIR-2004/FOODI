@@ -1,85 +1,82 @@
 import React from "react";
-import { FaUtensils } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import useAxiosPublic from '../../../Hooks/useAxiosPublic'
-import useAxiosSecure from '../../../Hooks/useAxiosSecure'
-import Swal from 'sweetalert2';
+import { toast } from "react-toastify";
+import { PlusCircle, UtensilsCrossed, DollarSign, FileText, Image, Tag, Sparkles } from "lucide-react";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AddMenu = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const axiosPublic = useAxiosPublic();
-  const axiosSecure = useAxiosSecure()
-  //image hosting key
-  const image_hosting_key =import.meta.env.VITE_IMAGE_HOSTING_KEY;
-  const image_hosting_api =`https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-  
-  
+  const axiosSecure = useAxiosSecure();
+
+  const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+  const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
   const onSubmit = async (data) => {
-    const imageFile ={image: data.image[0] }
+    const imageFile = { image: data.image[0] };
     const hostingImg = await axiosPublic.post(image_hosting_api, imageFile, {
-      headers:{
-        'content-type' : 'multipart/form-data'
-      }
-    }) 
+      headers: { "content-type": "multipart/form-data" },
+    });
 
-    if(hostingImg.data.success){
-      const menuItem ={
-        name : data.name,
+    if (hostingImg.data.success) {
+      const menuItem = {
+        name: data.name,
         category: data.category,
-        price: data.price,
+        price: parseFloat(data.price),
         recipe: data.recipe,
-        image: hostingImg.data.data.display_url
-      }
+        image: hostingImg.data.data.display_url,
+      };
 
-      //console.log(menuItem)
-      const postMenuItem = axiosSecure.post('/menu',menuItem);
-      if(postMenuItem){
-        reset()
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Your Item Is Added",
-          showConfirmButton: false,
-          timer: 1500
-        });
+      const postMenuItem = await axiosSecure.post("/menu", menuItem);
+      if (postMenuItem) {
+        reset();
+        toast.success("Menu item added successfully!");
       }
     }
   };
 
-  
-
   return (
-    <div className="w-full md:w-[870px] px-4 mx-auto">
-      <h2 className="text-2xl font-semibold my-4">
-        Upload A New Menu <span className="text-green">Item</span>
-      </h2>
-
-      {/**from here */}
+    <div className="max-w-3xl mx-auto space-y-6">
+      {/* Header */}
       <div>
-        {/**1st row */}
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-control w-full ">
-            <label className="label">
-              <span className="label-text">Recipe Name*</span>
+        <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-green/10 border border-green/20 rounded-full text-[10px] font-bold tracking-wider text-green uppercase mb-2">
+          <Sparkles className="h-2.5 w-2.5" /> Menu Management
+        </div>
+        <h1 className="text-2xl font-extrabold text-white tracking-tight">
+          Add New <span className="text-transparent bg-clip-text bg-gradient-to-r from-green to-emerald-400">Menu Item</span>
+        </h1>
+        <p className="text-slate-400 text-sm mt-1">Create a new gourmet dish for your restaurant catalog</p>
+      </div>
+
+      {/* Form Card */}
+      <div className="bg-[#0d1221]/80 border border-slate-800/60 rounded-2xl p-6 md:p-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Recipe Name */}
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <UtensilsCrossed className="h-3.5 w-3.5 text-green" /> Recipe Name
             </label>
             <input
               type="text"
               {...register("name", { required: true })}
-              placeholder="Recipe Name"
-              className="input input-bordered w-full "
+              placeholder="e.g. Truffle Risotto"
+              className="w-full bg-slate-900/60 border border-slate-800/80 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-green/50 focus:border-green/50 transition-all duration-200"
             />
           </div>
-          {/**2nd row */}
-          <div className="flex items-center  gap-4">
-            {/**categories */}
-            <div className="form-control w-full my-6">
-              <label className="label">
-                <span className="label-text">Category*</span>
+
+          {/* Category + Price Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                <Tag className="h-3.5 w-3.5 text-brand-gold" /> Category
               </label>
-              <select {...register("category", { required: true })}  className="select select-bordered" defaultValue="default">
-                <option disabled value="default">
-                  Select A Category
-                </option>
+              <select
+                {...register("category", { required: true })}
+                defaultValue="default"
+                className="w-full bg-slate-900/60 border border-slate-800/80 rounded-xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:ring-1 focus:ring-green/50 focus:border-green/50 transition-all duration-200 appearance-none cursor-pointer"
+              >
+                <option disabled value="default" className="text-slate-600">Select a category</option>
                 <option value="salad">Salad</option>
                 <option value="pizza">Pizza</option>
                 <option value="soup">Soup</option>
@@ -89,41 +86,54 @@ const AddMenu = () => {
               </select>
             </div>
 
-            {/**prices */}
-
-            <div className="form-control w-full ">
-              <label className="label">
-                <span className="label-text">price*</span>
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                <DollarSign className="h-3.5 w-3.5 text-emerald-400" /> Price
               </label>
               <input
                 type="number"
+                step="0.01"
                 {...register("price", { required: true })}
-                placeholder="Price"
-                className="input input-bordered w-full "
+                placeholder="0.00"
+                className="w-full bg-slate-900/60 border border-slate-800/80 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-green/50 focus:border-green/50 transition-all duration-200"
               />
             </div>
           </div>
 
-          {/**3rd row */}
-          <div className="form-control ">
-            <div className="label">
-              <span className="label-text">Recipe Details</span>
-            </div>
+          {/* Recipe Details */}
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <FileText className="h-3.5 w-3.5 text-cyan-400" /> Recipe Details
+            </label>
             <textarea
-            {...register("recipe", { required: true })}
-              className="textarea textarea-bordered h-24"
-              placeholder="Tell Words About Your Recipe"
+              {...register("recipe", { required: true })}
+              rows="4"
+              placeholder="Describe the dish ingredients, preparation method, and presentation..."
+              className="w-full bg-slate-900/60 border border-slate-800/80 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-green/50 focus:border-green/50 transition-all duration-200 resize-none"
             ></textarea>
           </div>
 
-          {/** row 4 */}
-          <div className="form-control w-full my-6">
-            <input {...register("image", { required: true })} type="file" className="file-input  w-full max-w-xs" />
+          {/* Image Upload */}
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <Image className="h-3.5 w-3.5 text-purple-400" /> Dish Photo
+            </label>
+            <div className="relative">
+              <input
+                {...register("image", { required: true })}
+                type="file"
+                accept="image/*"
+                className="w-full bg-slate-900/60 border border-slate-800/80 border-dashed rounded-xl px-4 py-4 text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-green/10 file:text-green hover:file:bg-green/20 file:cursor-pointer file:transition cursor-pointer focus:outline-none focus:ring-1 focus:ring-green/50 transition-all duration-200"
+              />
+            </div>
           </div>
 
-          <button className="btn bg-green text-white px-6">
-            Add Item
-            <FaUtensils />
+          {/* Submit */}
+          <button
+            type="submit"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 py-3.5 px-8 text-sm font-bold text-white bg-gradient-to-r from-green to-emerald-600 hover:from-emerald-500 hover:to-green rounded-xl shadow-lg shadow-green/15 hover:shadow-green/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+          >
+            <PlusCircle className="h-4.5 w-4.5" /> Add to Menu
           </button>
         </form>
       </div>

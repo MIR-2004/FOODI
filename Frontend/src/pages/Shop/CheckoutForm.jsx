@@ -1,6 +1,7 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import { FaPaypal } from "react-icons/fa";
+import { toast } from "react-toastify";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
@@ -88,7 +89,7 @@ const CheckoutForm = ({ price, cart }) => {
       //send data to backend
 
       axiosSecure.post("/payments", paymentInfo).then((res) => {
-        alert("payment Successfull");
+        toast.success("Payment successful!");
         navigate('/order')
       });
     }

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const {Schema} = mongoose;
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
 // Schema model 
 const userSchema = new Schema({
@@ -15,8 +15,8 @@ const userSchema = new Schema({
         enum: ['user', 'admin'],
         default: 'user'
     }
-})
+});
 
-// createw a model instance
+// create model instance
 const User = mongoose.model('User', userSchema);
-module.exports = User;
+export default User;

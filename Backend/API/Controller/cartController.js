@@ -1,8 +1,7 @@
-const carts = require("../Models/carts");
+import carts from "../Models/carts.js";
 
 // get carts using email 
-
-const getCartByEmail = async(req, res) => {
+export const getCartByEmail = async(req, res) => {
     try {
         const email = req.query.email;
         const query = {email: email}
@@ -15,7 +14,7 @@ const getCartByEmail = async(req, res) => {
 }
 
 // post a cart when add to cart clicked
-const addToCart = async(req, res) => {
+export const addToCart = async(req, res) => {
     const {menuItemId, name, recipe, image, price, quantity, email} = req.body;
     try {
         const existingCartItem = await carts.findOne({email,menuItemId});
@@ -30,7 +29,7 @@ const addToCart = async(req, res) => {
 }
 
 // delete a cart item
-const deleteCart = async (req, res) => {
+export const deleteCart = async (req, res) => {
     const cartId = req.params.id;
     try {
         const deletedCart = await carts.findByIdAndDelete(cartId);
@@ -44,7 +43,7 @@ const deleteCart = async (req, res) => {
 }
 
 //update cart item 
-const updateCart = async (req, res) => {
+export const updateCart = async (req, res) => {
     const cartId = req.params.id;
     const {menuItemId, name, recipe, image, price, quantity, email} = req.body;
 
@@ -64,7 +63,7 @@ const updateCart = async (req, res) => {
 }
 
 //get single Cart
-const getSingleCart = async (req, res) =>{
+export const getSingleCart = async (req, res) =>{
     const cartId = req.params.id;
     try {
         const cartItem = await carts.findById(cartId)
@@ -74,14 +73,3 @@ const getSingleCart = async (req, res) =>{
         res.status(500).json({message: error.message});
     }
 }
-
-
-
-
-module.exports = {
-    getCartByEmail,
-    addToCart,
-    deleteCart,
-    updateCart,
-    getSingleCart
-}                                                  

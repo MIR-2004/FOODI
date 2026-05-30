@@ -1,28 +1,14 @@
-const express = require('express');
-const Menu = require('../Models/Menu');
+import express from 'express';
+import { getAllMenuItenms, postMenuItem, deleteMenuItem, singleMenuItem, updateMenuItem } from '../Controller/menuController.js';
+import verifyToken from '../Middleware/verifyToken.js';
+import verifyAdmin from '../Middleware/verifyAdmin.js';
+
 const router = express.Router();
 
-const menuController = require('../Controller/menuController') 
-const verifyToken = require('../Middleware/verifyToken')
-const verifyAdmin = require('../Middleware/verifyAdmin')
+router.get('/', getAllMenuItenms);
+router.post('/', verifyToken, verifyAdmin, postMenuItem);
+router.delete('/:id', verifyToken, verifyAdmin, deleteMenuItem);
+router.get('/:id', singleMenuItem);
+router.patch('/:id', verifyToken, verifyAdmin, updateMenuItem);
 
-//get all menu items from
-
-router.get('/', menuController.getAllMenuItenms)
-
-// post menu item 
-
-router.post('/', verifyToken, verifyAdmin, menuController.postMenuItem)
-
-// delete item
-
-router.delete('/:id', verifyToken, verifyAdmin, menuController.deleteMenuItem)
-
-// get single menu item
-router.get('/:id', menuController.singleMenuItem)
-
-// update single item
-
-router.patch('/:id', verifyToken, verifyAdmin, menuController.updateMenuItem)
-
-module.exports = router;
+export default router;
