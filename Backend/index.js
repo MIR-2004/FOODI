@@ -30,9 +30,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 app.use(cors());
 app.use(express.json());
 
-const dbURI = process.env.DB_USER && process.env.DB_PASSWORD
+const dbURI = process.env.MONGODB_URI || (process.env.DB_USER && process.env.DB_PASSWORD
   ? `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.wn2uoz6.mongodb.net/?appName=Cluster0`
-  : "mongodb://127.0.0.1:27017/foodi";
+  : "mongodb://127.0.0.1:27017/foodi");
 
 const connectDB = async () => {
   try {
