@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
-import logo from "../../public/logo.png";
-import { Search, ShoppingCart, User as UserIcon, Menu as MenuIcon, X, ChevronDown, Sparkles } from "lucide-react";
+import { Search, ShoppingCart, User as UserIcon, Menu as MenuIcon, X, ChevronDown, Sparkles, ChefHat } from "lucide-react";
 import Model from "./Model";
 import { AuthContext } from "../Context/AuthProvider";
 import Profile from "./Profile";
@@ -62,8 +61,23 @@ const Navbar = () => {
         
         {/* BRAND LOGO */}
         <div className="flex items-center gap-6">
-          <Link to="/" className="flex items-center gap-2 transform hover:scale-105 transition duration-300">
-            <img src={logo} alt="FOODI" className="h-9 md:h-10" />
+          <Link to="/" className="flex items-center gap-3 group">
+            {/* Brand Logo Symbol with luxury style and glow */}
+            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-green via-emerald-400 to-green text-slate-950 font-black shadow-lg shadow-green/20 group-hover:shadow-green/45 group-hover:scale-105 group-hover:rotate-3 transition-all duration-300">
+              <ChefHat className="w-5.5 h-5.5 text-slate-950" />
+              {/* Soft radial glow behind the icon */}
+              <span className="absolute inset-0 rounded-xl bg-gradient-to-tr from-green to-emerald-400 blur-sm opacity-50 group-hover:opacity-85 transition-opacity duration-300 -z-10" />
+            </div>
+            
+            {/* Brand Name Text with luxury custom font styling */}
+            <div className="flex flex-col text-left">
+              <span className="font-['Outfit'] text-2xl font-black tracking-tight leading-none text-white transition-colors duration-300">
+                in<span className="bg-gradient-to-r from-green to-emerald-400 bg-clip-text text-transparent group-hover:from-emerald-400 group-hover:to-green transition-all duration-300">food</span>
+              </span>
+              <span className="text-[9px] uppercase tracking-[0.22em] font-bold text-slate-400 group-hover:text-green transition-colors duration-300 mt-1 leading-none">
+                fine dining
+              </span>
+            </div>
           </Link>
         </div>
 

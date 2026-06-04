@@ -5,7 +5,9 @@ const Footer = () => {
     <div className="bg-[#080b13] border-t border-slate-900/80">
       <footer className="footer xl:px-24 py-16 px-4 text-slate-400 max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         <aside className="space-y-4">
-          <img src="/logo.png" alt="FOODI" className="h-10" />
+          <span className="font-['Outfit'] text-2xl font-black tracking-tight leading-none text-white transition-colors duration-300">
+            in<span className="bg-gradient-to-r from-green to-emerald-400 bg-clip-text text-transparent group-hover:from-emerald-400 group-hover:to-green transition-all duration-300">food</span>
+          </span>
           <p className="my-5 md:w-56 text-sm leading-relaxed">
             Savor the artistry where every dish is a culinary masterpiece of flavor and hospitality.
           </p>
@@ -36,7 +38,7 @@ const Footer = () => {
 
       <footer className="footer xl:px-24 py-8 px-4 items-center max-w-screen-2xl mx-auto text-slate-500 text-sm">
         <aside className="grid-flow-col items-center">
-          <p>© {new Date().getFullYear()} FOODI. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} infood. All rights reserved.</p>
         </aside>
         <nav className="grid-flow-col gap-5 md:place-self-center md:justify-self-end">
           <a className="hover:text-green transition-colors duration-300 cursor-pointer">
