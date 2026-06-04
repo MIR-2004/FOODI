@@ -334,7 +334,7 @@ const Login = () => {
               onClick={handleGoogleLogin} 
               className="w-12 h-12 flex items-center justify-center bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800 hover:border-slate-700 rounded-xl text-slate-300 hover:text-white hover:scale-110 active:scale-95 transition-all duration-300 shadow-md hover:shadow-green/10"
             >
-              <FaGoogle className="h-5 w-5 text-red-400" />
+              <FaGoogle className="h-5 w-5 text-red" />
             </button>
             <button 
               className="w-12 h-12 flex items-center justify-center bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800 hover:border-slate-700 rounded-xl text-slate-300 hover:text-white hover:scale-110 active:scale-95 transition-all duration-300 shadow-md"

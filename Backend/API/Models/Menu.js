@@ -13,6 +13,10 @@ const menuSchema = new Schema({
     image: String,
     category: String,
     price: Number,
+    isVeg: {
+        type: Boolean,
+        default: false
+    },
     createdAt: {
         type: Date,
         default: Date.now

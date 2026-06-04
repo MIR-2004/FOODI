@@ -118,10 +118,10 @@ const Menu = () => {
           <div className="flex flex-wrap items-center gap-2 md:gap-3">
             {[
               { id: "all", label: "All Items" },
-              { id: "salad", label: "Salads" },
-              { id: "pizza", label: "Pizzas" },
-              { id: "soup", label: "Soups" },
+              { id: "fast food", label: "Fast Food" },
+              { id: "meal", label: "Meals" },
               { id: "dessert", label: "Desserts" },
+              { id: "starter", label: "Starters" },
               { id: "drinks", label: "Drinks" }
             ].map((cat) => (
               <button

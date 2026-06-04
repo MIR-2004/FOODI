@@ -1,12 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { PlusCircle, UtensilsCrossed, DollarSign, FileText, Image, Tag, Sparkles } from "lucide-react";
+import { PlusCircle, UtensilsCrossed, DollarSign, FileText, Image, Tag, Sparkles, Leaf } from "lucide-react";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AddMenu = () => {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm({
+    defaultValues: { isVeg: "true" }
+  });
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
 
@@ -26,6 +28,7 @@ const AddMenu = () => {
         price: parseFloat(data.price),
         recipe: data.recipe,
         image: hostingImg.data.data.display_url,
+        isVeg: data.isVeg === "true",
       };
 
       const postMenuItem = await axiosSecure.post("/menu", menuItem);
@@ -77,12 +80,11 @@ const AddMenu = () => {
                 className="w-full bg-slate-900/60 border border-slate-800/80 rounded-xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:ring-1 focus:ring-green/50 focus:border-green/50 transition-all duration-200 appearance-none cursor-pointer"
               >
                 <option disabled value="default" className="text-slate-600">Select a category</option>
-                <option value="salad">Salad</option>
-                <option value="pizza">Pizza</option>
-                <option value="soup">Soup</option>
+                <option value="fast food">Fast Food</option>
+                <option value="meal">Meal</option>
                 <option value="dessert">Dessert</option>
+                <option value="starter">Starter</option>
                 <option value="drinks">Drinks</option>
-                <option value="popular">Popular</option>
               </select>
             </div>
 
@@ -97,6 +99,55 @@ const AddMenu = () => {
                 placeholder="0.00"
                 className="w-full bg-slate-900/60 border border-slate-800/80 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-green/50 focus:border-green/50 transition-all duration-200"
               />
+            </div>
+          </div>
+
+          {/* Veg / Non-Veg Toggle */}
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <Leaf className="h-3.5 w-3.5 text-green" /> Food Type
+            </label>
+            <div className="flex items-center gap-4">
+              <label className={`flex items-center gap-2.5 cursor-pointer px-4 py-2.5 rounded-xl border transition-all duration-200 ${
+                watch("isVeg") === "true"
+                  ? "bg-green/15 border-green/50 shadow-lg shadow-green/10"
+                  : "bg-slate-900/60 border-slate-800/80 hover:border-slate-700"
+              }`}>
+                <input
+                  type="radio"
+                  value="true"
+                  {...register("isVeg", { required: true })}
+                  className="sr-only"
+                />
+                <span className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all duration-200 ${
+                  watch("isVeg") === "true" ? "bg-green border-green" : "border-green/40"
+                }`}>
+                  <span className={`w-2 h-2 rounded-sm transition-all duration-200 ${
+                    watch("isVeg") === "true" ? "bg-white" : "bg-green/60"
+                  }`}></span>
+                </span>
+                <span className={`text-sm font-semibold transition-colors ${
+                  watch("isVeg") === "true" ? "text-green" : "text-slate-400"
+                }`}>Veg</span>
+              </label>
+              <label className={`flex items-center gap-2.5 cursor-pointer px-4 py-2.5 rounded-xl border transition-all duration-200 ${
+                watch("isVeg") === "false"
+                  ? "bg-red/15 border-red/50 shadow-lg shadow-red/10"
+                  : "bg-slate-900/60 border-red/20 hover:border-red/40"
+              }`}>
+                <input
+                  type="radio"
+                  value="false"
+                  {...register("isVeg", { required: true })}
+                  className="sr-only"
+                />
+                <span className="w-4 h-4 rounded border-2 border-red flex items-center justify-center">
+                  <span className="w-2 h-2 rounded-sm bg-red"></span>
+                </span>
+                <span className={`text-sm font-semibold transition-colors ${
+                  watch("isVeg") === "false" ? "text-red" : "text-red/70"
+                }`}>Non-Veg</span>
+              </label>
             </div>
           </div>
 

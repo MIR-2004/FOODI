@@ -192,7 +192,7 @@ const Model = () => {
                 onClick={handleGoogleLogin}
                 className="w-9 h-9 flex items-center justify-center bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 rounded-lg text-slate-400 hover:text-white transition duration-300"
               >
-                <FaGoogle className="h-4 w-4 text-red-400" />
+                <FaGoogle className="h-4 w-4 text-red" />
               </button>
               <button className="w-9 h-9 flex items-center justify-center bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 rounded-lg text-slate-400 hover:text-white transition duration-300">
                 <FaFacebookF className="h-4 w-4 text-blue-500" />

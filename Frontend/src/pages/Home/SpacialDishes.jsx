@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { useState} from 'react';
 import Cards from '../../Components/Cards';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
+import useMenu from '../../Hooks/useMenu';
 
 const SimpleNextArrow = (props) =>{
   const{className, style, onClick} = props;
@@ -24,16 +24,10 @@ const SimplePrevArrow = (props) =>{
 
 const SpacialDishes = () => {
 
-  const [recipes, setRecipes] = useState([]);
+  const [menu] = useMenu();
+  const recipes = menu.filter((item) => item.category === "meal");
 
   const slider = React.useRef(null)
-
-  useEffect(() => {
-        fetch("/menu.json").then(res => res.json()).then(data =>{
-          const specials = data.filter((item) => item.category === "popular")
-          setRecipes(specials)
-        })
-  }, []);
 
   const settings = {
     dots: true,

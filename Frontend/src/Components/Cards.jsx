@@ -91,6 +91,17 @@ const Cards = ({ item }) => {
             className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 md:h-64"
           />
         </figure>
+        {/* Veg / Non-Veg Badge */}
+        {item.isVeg !== undefined && (
+          <span className={`absolute bottom-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold tracking-wide backdrop-blur-md border ${
+            item.isVeg
+              ? "bg-green/15 border-green/30 text-green"
+              : "bg-red/15 border-red/30 text-red"
+          }`}>
+            <span className={`w-2 h-2 rounded-full ${item.isVeg ? "bg-green" : "bg-red"}`}></span>
+            {item.isVeg ? "Veg" : "Non-Veg"}
+          </span>
+        )}
       </Link>
       <div className="card-body px-1 py-4 space-y-2">
         <Link to={`/menu/${item._id}`}>

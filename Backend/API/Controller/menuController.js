@@ -49,9 +49,9 @@ export const singleMenuItem = async (req, res) => {
 //update single menu item 
 export const updateMenuItem = async (req, res) => {
     const menuId = req.params.id;
-    const { name, recipe, image, price, category} = req.body;
+    const { name, recipe, image, price, category, isVeg} = req.body;
     try {
-        const updateMenu = await Menu.findByIdAndUpdate(menuId, {name, recipe, image, price, category}, {new: true, runValidators: true});
+        const updateMenu = await Menu.findByIdAndUpdate(menuId, {name, recipe, image, price, category, isVeg}, {new: true, runValidators: true});
         if(!updateMenu){
             return res.status(404).json({message: 'Menu Not Found'})
         }
