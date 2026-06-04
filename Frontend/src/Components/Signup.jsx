@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle, FaFacebookF, FaGithub } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import { User, Mail, Lock, Eye, EyeOff, ArrowLeft, Sparkles, TrendingUp, Users } from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff, ArrowLeft, Sparkles, TrendingUp, Users, ChefHat } from "lucide-react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Context/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
@@ -138,8 +138,14 @@ const Signup = () => {
         
         {/* Brand header */}
         <div className="relative z-10 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 transform hover:scale-105 transition-all duration-300">
-            <img src="/logo.png" alt="FOODI" className="h-10" />
+          <Link to="/" className="flex items-center gap-3 group transform hover:scale-105 transition-all duration-300">
+            <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-tr from-green via-emerald-400 to-green text-slate-950 font-black shadow-lg shadow-green/20 group-hover:scale-105 transition-all duration-300">
+              <ChefHat className="w-5 h-5 text-slate-950" />
+              <span className="absolute inset-0 rounded-xl bg-gradient-to-tr from-green to-emerald-400 blur-sm opacity-50 -z-10" />
+            </div>
+            <span className="font-['Outfit'] text-xl font-black tracking-tight leading-none text-white">
+              in<span className="text-green">food</span>
+            </span>
           </Link>
           <Link to="/" className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white transition duration-300 bg-slate-900/60 border border-slate-800/80 px-3 py-1.5 rounded-lg backdrop-blur-md">
             <ArrowLeft className="h-3.5 w-3.5" /> Back to Site
@@ -207,7 +213,7 @@ const Signup = () => {
 
         {/* Brand footer */}
         <div className="relative z-10 text-slate-500 text-xs flex justify-between items-center">
-          <p>© {new Date().getFullYear()} FOODI. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} infood. All rights reserved.</p>
           <div className="flex gap-4">
             <a href="#" className="hover:text-slate-350 transition">Privacy</a>
             <a href="#" className="hover:text-slate-350 transition">Terms</a>
@@ -225,8 +231,14 @@ const Signup = () => {
           {/* Header */}
           <div className="text-center relative">
             <div className="md:hidden mb-6 flex justify-center">
-              <Link to="/" className="inline-block transform hover:scale-105 transition duration-300">
-                <img className="h-10 w-auto" src="/logo.png" alt="FOODI Logo" />
+              <Link to="/" className="flex items-center gap-3 group transform hover:scale-105 transition-all duration-300">
+                <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-tr from-green via-emerald-400 to-green text-slate-950 font-black shadow-lg shadow-green/20 group-hover:scale-105 transition-all duration-300">
+                  <ChefHat className="w-5 h-5 text-slate-950" />
+                  <span className="absolute inset-0 rounded-xl bg-gradient-to-tr from-green to-emerald-400 blur-sm opacity-50 -z-10" />
+                </div>
+                <span className="font-['Outfit'] text-xl font-black tracking-tight leading-none text-white">
+                  in<span className="text-green">food</span>
+                </span>
               </Link>
             </div>
             

@@ -14,8 +14,8 @@ import {
   X,
   ChevronRight,
   Sparkles,
+  ChefHat,
 } from "lucide-react";
-import logo from "/logo.png";
 import useAuth from "../Hooks/useAuth";
 import useAdmin from "../Hooks/useAdmin";
 import Loading from "../Components/Loading";
@@ -79,13 +79,19 @@ const DashboardLayout = () => {
     <div className="flex flex-col h-full">
       {/* Brand */}
       <div className="px-5 pt-6 pb-4">
-        <Link to="/dashboard" className="flex items-center gap-3" onClick={() => setSidebarOpen(false)}>
-          <img src={logo} alt="Foodi" className="w-12 h-12 object-contain drop-shadow-lg" />
+        <Link to="/dashboard" className="flex items-center gap-3 group" onClick={() => setSidebarOpen(false)}>
+          {/* Brand Logo Symbol */}
+          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-green via-emerald-400 to-green text-slate-950 font-black shadow-lg shadow-green/20 group-hover:scale-105 transition-all duration-300">
+            <ChefHat className="w-5.5 h-5.5 text-slate-950" />
+            <span className="absolute inset-0 rounded-xl bg-gradient-to-tr from-green to-emerald-400 blur-sm opacity-50 -z-10" />
+          </div>
           <div>
-            <h2 className="text-lg font-black text-white tracking-tight leading-none">FOODI</h2>
-            <div className="flex items-center gap-1 mt-0.5">
-              <Sparkles className="h-2.5 w-2.5 text-green" />
-              <span className="text-[9px] font-bold text-green uppercase tracking-widest">Admin Console</span>
+            <h2 className="font-['Outfit'] text-lg font-black text-white tracking-tight leading-none">
+              in<span className="text-green">food</span>
+            </h2>
+            <div className="flex items-center gap-1 mt-1">
+              <Sparkles className="h-2 w-2 text-green" />
+              <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none">Admin Console</span>
             </div>
           </div>
         </Link>

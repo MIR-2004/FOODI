@@ -25,7 +25,7 @@ const Testimonials = () => {
             <h1 className="title leading-tight">What Our Customers Say About Us</h1>
             
             <blockquote className="text-slate-300 text-lg md:text-xl font-light italic leading-relaxed border-l-4 border-green pl-6 py-1 my-6 bg-slate-900/30 rounded-r-2xl pr-4">
-              "I had the pleasure of dining at Foodi last night, and I'm still
+              "I had the pleasure of dining at infood last night, and I'm still
               raving about the experience! The attention to detail in
               presentation and service was impeccable."
             </blockquote>
