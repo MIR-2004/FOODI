@@ -6,7 +6,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { ShoppingBag, DollarSign, Calendar, Hash, ShieldAlert, PhoneCall, Compass, ArrowRight, Sparkles } from "lucide-react";
 
 function Order() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const { refetch, data: orders = [], isLoading } = useQuery({
@@ -15,7 +15,7 @@ function Order() {
       const res = await axiosSecure.get(`/payments?email=${user?.email}`);
       return res.data;
     },
-    enabled: !!user?.email,
+    enabled: !loading && !!user?.email,
   });
 
   const formatDate = (createdAt) => {

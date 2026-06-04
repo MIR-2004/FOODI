@@ -3,7 +3,7 @@ import useAuth from './useAuth';
 import useAxiosSecure from './useAxiosSecure';
 
 const useAdmin = () => {
-    const {user} = useAuth();
+    const {user, loading} = useAuth();
     const axiosSecure = useAxiosSecure();
 
     const {refetch,data:isAdmin, isPending: isAdminLoading} = useQuery({
@@ -13,7 +13,7 @@ const useAdmin = () => {
             console.log(res.data)
             return res.data?.admin
           },
-        enabled: !!user?.email,
+        enabled: !loading && !!user?.email,
     })
   return [isAdmin, isAdminLoading]
 }
