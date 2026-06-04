@@ -23,7 +23,7 @@ const paymentRoutes = (await import("./API/Routs/paymentRoutes.js")).default;
 dotenv.config();
 
 const app = express();
-const port = 6001;
+const port = process.env.PORT || 6001;
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 //middleware
